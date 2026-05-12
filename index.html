@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>hummingbird habit · behavioral intelligence venture ecosystem</title>
 
-  <!-- Museo Moderno + Finger Paint: exact brand fonts, available on Google Fonts -->
+  <!-- MuseoModerno (900) + Finger Paint: exact brand fonts -->
   <!-- Muller + Taviraij: commercial brand fonts. Add font files to /assets/fonts/ to activate. Raleway + Lora used as fallbacks until then. -->
-  <link href="https://fonts.googleapis.com/css2?family=Museo+Moderno:wght@400;600;700;900&family=Finger+Paint&family=Raleway:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Finger+Paint&family=Raleway:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
   <style>
     @font-face {
@@ -44,7 +46,7 @@
       --turquoise: #9AD3C2;
       --light-bg:  #F7F8FA;
 
-      --f-header:  'Museo Moderno', sans-serif;
+      --f-header:  "MuseoModerno", sans-serif;
       --f-sub:     'Muller', 'Raleway', sans-serif;
       --f-body:    'Taviraij', 'Lora', serif;
       --f-quote:   'Finger Paint', cursive;
@@ -52,7 +54,7 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--f-body); color: #333; overflow-x: hidden; }
+    body { font-family: var(--f-sub); color: #333; overflow-x: hidden; }
 
     /* ---- NAV ---- */
     nav {
@@ -103,7 +105,7 @@
       background: radial-gradient(circle, rgba(45,157,120,0.11), transparent 70%);
       bottom: -100px; left: 100px;
     }
-    .hero-content { max-width: 580px; flex: 0 1 580px; position: relative; z-index: 2; }
+    .hero-content { max-width: 720px; flex: 0 1 720px; position: relative; z-index: 2; }
     .hero-eyebrow {
       display: inline-block; font-family: var(--f-sub);
       font-size: 0.72rem; font-weight: 700; letter-spacing: 3.5px;
@@ -111,8 +113,10 @@
     }
     .hero h1 {
       font-family: var(--f-header);
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
-      font-weight: 900; color: white; line-height: 1.08; margin-bottom: 28px;
+      font-size: clamp(1.8rem, 3.2vw, 3rem);
+      font-weight: 900; font-optical-sizing: auto;
+      text-transform: lowercase;
+      color: white; line-height: 1.12; margin-bottom: 28px;
     }
     .hero h1 .accent { color: var(--coral); }
     .hero-body {
@@ -164,7 +168,9 @@
     h2 {
       font-family: var(--f-header);
       font-size: clamp(1.9rem, 3.2vw, 2.9rem);
-      font-weight: 800; color: var(--indigo); line-height: 1.12; margin-bottom: 18px;
+      font-weight: 900; font-optical-sizing: auto;
+      text-transform: lowercase;
+      color: var(--indigo); line-height: 1.12; margin-bottom: 18px;
     }
     h2 .muted { display: block; font-family: var(--f-sub); font-weight: 400; color: #888; font-size: 0.65em; margin-top: 6px; }
     .s-intro {
@@ -175,7 +181,7 @@
     /* ---- WHY ---- */
     .why-bg { background: var(--light-bg); }
     .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .why-body { font-family: var(--f-body); color: #555; line-height: 1.85; font-size: 1rem; }
+    .why-body { font-family: var(--f-sub); color: #555; line-height: 1.85; font-size: 1rem; }
     .iq-row { display: flex; align-items: center; gap: 10px; margin-top: 40px; }
     .iq-box { flex: 1; text-align: center; }
     .iq-letter { font-family: var(--f-header); font-size: 1.9rem; font-weight: 900; }
@@ -463,12 +469,11 @@
   <div class="hero-content">
     <span class="hero-eyebrow">behavioral intelligence venture ecosystem</span>
     <h1>
-      we built the<br>
-      <span class="accent">operating system</span><br>
+      we built the <span class="accent">operating system</span><br>
       for human flourishing.
     </h1>
     <p class="hero-body">
-      designing spaces, rituals, communities, and tools that make conscious living the natural default, not the effortful exception.
+      Designing spaces, rituals, communities, and tools that make conscious living the natural default, not the effortful exception.
     </p>
     <div class="hero-ctas">
       <a href="#ecosystem" class="btn-primary">explore the ecosystem</a>
@@ -512,7 +517,7 @@
     <span class="muted">our inner worlds are collapsing.</span>
   </h2>
   <p class="s-intro">
-    there are more self-help books, wellness apps, and therapy modalities than ever. and yet the gap between what we know and how we actually live keeps widening. this isn't a knowledge problem. <strong>it's a design problem.</strong>
+    There are more self-help books, wellness apps, and therapy modalities than ever. And yet the gap between what we know and how we actually live keeps widening. This isn't a knowledge problem. <strong>It's a design problem.</strong>
   </p>
   <div class="why-grid">
     <div>
@@ -550,7 +555,7 @@
   <div class="sketch-title">the coffee ritual · AI vs. BI in action</div>
   <img src="assets/sketch-coffee-ritual.png" alt="The Coffee Ritual: AI vs BI in Action" class="sketch-img"/>
   <p class="sketch-caption">
-    generic AI remembers your preference and executes it. BI-enhanced AI reads your emotional state and nudges you toward a better choice, without forcing it.
+    Generic AI remembers your preference and executes it. BI-enhanced AI reads your emotional state and nudges you toward a better choice, without forcing it.
   </p>
 </div>
 
@@ -750,7 +755,7 @@
     <span class="muted">it probably was.</span>
   </h2>
   <p class="s-intro">
-    a world where every space you enter, every meal you share, every product you use, is designed to help you flourish. not as a wellness feature. as the default architecture of daily life.
+    A world where every space you enter, every meal you share, every product you use, is designed to help you flourish. Not as a wellness feature. As the default architecture of daily life.
   </p>
   <div class="entry-grid">
     <div class="entry">
