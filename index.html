@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hummingbird habit · behavioral intelligence venture ecosystem</title>
+
+  <!-- Museo Moderno + Finger Paint: exact brand fonts, available on Google Fonts -->
+  <!-- Muller + Taviraij: commercial brand fonts. Add font files to /assets/fonts/ to activate. Raleway + Lora used as fallbacks until then. -->
+  <link href="https://fonts.googleapis.com/css2?family=Museo+Moderno:wght@400;600;700;900&family=Finger+Paint&family=Raleway:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Muller';
+      src: url('assets/fonts/Muller-Regular.woff2') format('woff2'),
+           url('assets/fonts/Muller-Regular.woff') format('woff');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Muller';
+      src: url('assets/fonts/Muller-SemiBold.woff2') format('woff2'),
+           url('assets/fonts/Muller-SemiBold.woff') format('woff');
+      font-weight: 600; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Muller';
+      src: url('assets/fonts/Muller-Bold.woff2') format('woff2'),
+           url('assets/fonts/Muller-Bold.woff') format('woff');
+      font-weight: 700; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Taviraij';
+      src: url('assets/fonts/Taviraij-Regular.woff2') format('woff2'),
+           url('assets/fonts/Taviraij-Regular.woff') format('woff');
+      font-weight: 400; font-style: normal;
+    }
+
+    :root {
+      --indigo:    #2B3649;
+      --green:     #2D9D78;
+      --gold:      #FFC845;
+      --coral:     #FF5A53;
+      --ash:       #DFE0E8;
+      --turquoise: #9AD3C2;
+      --light-bg:  #F7F8FA;
+
+      --f-header:  'Museo Moderno', sans-serif;
+      --f-sub:     'Muller', 'Raleway', sans-serif;
+      --f-body:    'Taviraij', 'Lora', serif;
+      --f-quote:   'Finger Paint', cursive;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--f-body); color: #333; overflow-x: hidden; }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 14px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(43,54,73,0.97);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+    .nav-brand-text {
+      font-family: var(--f-header);
+      font-weight: 700; font-size: 1.05rem; color: white; letter-spacing: -0.2px;
+      line-height: 1.1;
+    }
+    .nav-brand-text span { display: block; color: var(--coral); font-size: 0.75em; font-weight: 400; letter-spacing: 1px; }
+    .nav-logo-img { height: 48px; width: auto; display: block; border-radius: 6px; }
+    nav ul { list-style: none; display: flex; gap: 36px; align-items: center; }
+    nav ul a {
+      font-family: var(--f-sub);
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.88rem; font-weight: 600; transition: color 0.25s;
+    }
+    nav ul a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--coral) !important; color: white !important;
+      padding: 9px 22px; border-radius: 50px; transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh; background: var(--indigo);
+      display: flex; align-items: center; justify-content: space-between; gap: 40px;
+      padding: 130px 64px 80px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,90,83,0.14), transparent 70%);
+      top: -150px; right: -150px;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,157,120,0.11), transparent 70%);
+      bottom: -100px; left: 100px;
+    }
+    .hero-content { max-width: 580px; flex: 0 1 580px; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-block; font-family: var(--f-sub);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 3.5px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-family: var(--f-header);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 900; color: white; line-height: 1.08; margin-bottom: 28px;
+    }
+    .hero h1 .accent { color: var(--coral); }
+    .hero-body {
+      font-family: var(--f-sub); font-size: 1.1rem;
+      color: rgba(255,255,255,0.65); line-height: 1.8;
+      margin-bottom: 44px; max-width: 540px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--coral); color: white;
+      padding: 15px 36px; border-radius: 50px;
+      font-family: var(--f-sub); font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,90,83,0.45); }
+    .btn-ghost {
+      background: transparent; color: white;
+      padding: 15px 36px; border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.25);
+      font-family: var(--f-sub); font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; display: inline-block;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.07); }
+    .hero-proof {
+      position: absolute; bottom: 48px; left: 64px; z-index: 2;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-proof-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .hero-proof-text { font-family: var(--f-sub); font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+
+    /* ---- STATS ---- */
+    .stats {
+      background: var(--coral); padding: 44px 64px;
+      display: flex; justify-content: space-around; flex-wrap: wrap; gap: 28px;
+    }
+    .stat { text-align: center; color: white; }
+    .stat-n { font-family: var(--f-header); font-size: 2.6rem; font-weight: 900; display: block; }
+    .stat-l { font-family: var(--f-sub); font-size: 0.82rem; font-weight: 600; opacity: 0.9; max-width: 150px; line-height: 1.3; }
+
+    /* ---- SECTIONS ---- */
+    section { padding: 100px 64px; }
+    .s-tag {
+      font-family: var(--f-sub); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--coral); display: block; margin-bottom: 14px;
+    }
+    h2 {
+      font-family: var(--f-header);
+      font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+      font-weight: 800; color: var(--indigo); line-height: 1.12; margin-bottom: 18px;
+    }
+    h2 .muted { display: block; font-family: var(--f-sub); font-weight: 400; color: #888; font-size: 0.65em; margin-top: 6px; }
+    .s-intro {
+      font-family: var(--f-sub); font-size: 1.05rem;
+      color: #5a5a5a; line-height: 1.85; max-width: 660px; margin-bottom: 56px;
+    }
+
+    /* ---- WHY ---- */
+    .why-bg { background: var(--light-bg); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .why-body { font-family: var(--f-body); color: #555; line-height: 1.85; font-size: 1rem; }
+    .iq-row { display: flex; align-items: center; gap: 10px; margin-top: 40px; }
+    .iq-box { flex: 1; text-align: center; }
+    .iq-letter { font-family: var(--f-header); font-size: 1.9rem; font-weight: 900; }
+    .iq-letter.iq { color: #c0c0c0; }
+    .iq-letter.eq { color: var(--green); }
+    .iq-letter.bi { color: var(--gold); }
+    .iq-sub { font-family: var(--f-sub); font-size: 0.72rem; color: #999; margin-top: 4px; line-height: 1.3; }
+    .iq-arrow { color: var(--coral); font-size: 1.4rem; flex-shrink: 0; }
+    .pull-quote {
+      font-family: var(--f-quote); font-size: 1.3rem; color: var(--coral); line-height: 1.6;
+      padding: 40px; background: white; border-radius: 24px;
+      border-left: 5px solid var(--coral); box-shadow: 0 6px 30px rgba(0,0,0,0.06);
+    }
+
+    /* ---- SKETCH CALLOUT ---- */
+    .sketch-section {
+      background: white; padding: 80px 64px;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      border-top: 1px solid var(--ash); border-bottom: 1px solid var(--ash);
+    }
+    .sketch-label {
+      font-family: var(--f-sub); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: #bbb;
+      margin-bottom: 10px; text-align: center;
+    }
+    .sketch-title {
+      font-family: var(--f-quote); font-size: 1rem; color: var(--indigo);
+      margin-bottom: 36px; text-align: center;
+    }
+    .sketch-img {
+      max-width: 820px; width: 100%; border-radius: 16px;
+      box-shadow: 0 6px 36px rgba(0,0,0,0.08);
+    }
+    .sketch-caption {
+      font-family: var(--f-sub); font-size: 0.82rem; color: #999;
+      margin-top: 20px; text-align: center; max-width: 560px; line-height: 1.6;
+    }
+
+    /* ---- PILLARS ---- */
+    .pillars-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 22px; max-width: 820px; }
+    .pillar {
+      background: white; border-radius: 22px; padding: 36px;
+      box-shadow: 0 4px 22px rgba(0,0,0,0.055); border-top: 4px solid;
+    }
+    .pillar:nth-child(1) { border-color: var(--green); }
+    .pillar:nth-child(2) { border-color: var(--gold); }
+    .pillar:nth-child(3) { border-color: var(--coral); }
+    .pillar:nth-child(4) { border-color: var(--turquoise); }
+    .pillar-cat { font-family: var(--f-sub); font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #bbb; margin-bottom: 8px; }
+    .pillar-name { font-family: var(--f-header); font-size: 1.05rem; font-weight: 700; color: var(--indigo); margin-bottom: 12px; }
+    .pillar-text { font-family: var(--f-sub); font-size: 0.88rem; color: #666; line-height: 1.65; }
+
+    /* ---- PROTOCOL ---- */
+    .protocol-bg { background: var(--indigo); }
+    .protocol-bg h2 { color: white; }
+    .protocol-bg h2 .muted { color: rgba(255,255,255,0.45); }
+    .protocol-bg .s-intro { color: rgba(255,255,255,0.6); }
+    .protocol-bg .s-tag { color: var(--gold); }
+    .steps { display: flex; gap: 0; position: relative; margin-top: 60px; }
+    .steps::before {
+      content: ''; position: absolute;
+      top: 34px; left: 60px; right: 60px; height: 1px;
+      background: rgba(255,255,255,0.1); z-index: 0;
+    }
+    .step { flex: 1; text-align: center; position: relative; z-index: 1; padding: 0 8px; }
+    .step-circle {
+      width: 68px; height: 68px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-header); font-size: 1rem; font-weight: 800;
+      margin: 0 auto 18px; border: 2px solid;
+    }
+    .step:nth-child(1) .step-circle { background: rgba(255,90,83,0.15); border-color: var(--coral); color: var(--coral); }
+    .step:nth-child(2) .step-circle { background: rgba(255,200,69,0.15); border-color: var(--gold); color: var(--gold); }
+    .step:nth-child(3) .step-circle { background: rgba(45,157,120,0.15); border-color: var(--green); color: var(--green); }
+    .step:nth-child(4) .step-circle { background: rgba(154,211,194,0.15); border-color: var(--turquoise); color: var(--turquoise); }
+    .step:nth-child(5) .step-circle { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); color: white; }
+    .step-word { font-family: var(--f-header); font-size: 1.25rem; font-weight: 800; color: white; margin-bottom: 10px; }
+    .step-desc { font-family: var(--f-sub); font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.55; }
+
+    /* ---- ECOSYSTEM ---- */
+    .eco-bg { background: var(--light-bg); }
+    .ventures { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+    .venture {
+      background: white; border-radius: 22px; padding: 32px;
+      box-shadow: 0 4px 22px rgba(0,0,0,0.055);
+      position: relative; overflow: hidden;
+      transition: transform 0.28s, box-shadow 0.28s;
+    }
+    .venture:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(0,0,0,0.11); }
+    .v-badge {
+      position: absolute; top: 18px; right: 18px;
+      font-family: var(--f-sub); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; padding: 4px 11px; border-radius: 50px;
+    }
+    .v-op { background: var(--coral); color: white; }
+    .v-dev { background: var(--green); color: white; }
+    .v-con { background: var(--ash); color: var(--indigo); }
+    .v-icon { font-size: 1.9rem; margin-bottom: 14px; }
+    .v-logo { height: 52px; object-fit: contain; margin-bottom: 14px; display: block; }
+    .v-name { font-family: var(--f-header); font-size: 1.15rem; font-weight: 800; color: var(--indigo); margin-bottom: 10px; }
+    .v-desc { font-family: var(--f-sub); font-size: 0.88rem; color: #666; line-height: 1.65; }
+
+    /* ---- MEMBERSHIP ---- */
+    .tiers { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 56px; }
+    .tier { border: 2px solid var(--ash); border-radius: 22px; padding: 34px 24px; position: relative; transition: transform 0.28s; }
+    .tier:hover { transform: translateY(-4px); }
+    .tier.hot { border-color: var(--coral); background: #fff7f7; }
+    .tier-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--coral); color: white;
+      font-family: var(--f-sub); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 50px; white-space: nowrap;
+    }
+    .tier-name { font-family: var(--f-header); font-size: 0.78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #aaa; margin-bottom: 8px; }
+    .tier-price { font-family: var(--f-header); font-size: 2.4rem; font-weight: 900; color: var(--indigo); }
+    .tier-price span { font-size: 0.9rem; font-weight: 400; color: #aaa; }
+    .tier-blurb { font-family: var(--f-sub); font-size: 0.83rem; color: #888; margin: 10px 0 22px; line-height: 1.5; }
+    .tier-list { list-style: none; }
+    .tier-list li {
+      font-family: var(--f-sub); font-size: 0.82rem; color: #555;
+      padding: 6px 0; border-bottom: 1px solid #f2f2f2;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .tier-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    /* ---- INVITATION ---- */
+    .invite-bg { background: var(--indigo); text-align: center; }
+    .invite-bg h2 { color: white; }
+    .invite-bg h2 .muted { color: rgba(255,255,255,0.4); }
+    .invite-bg .s-tag { color: var(--gold); }
+    .invite-bg .s-intro { color: rgba(255,255,255,0.6); margin: 0 auto 56px; }
+    .entry-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; max-width: 900px; margin: 0 auto; }
+    .entry {
+      background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px; padding: 40px 30px; transition: background 0.28s;
+    }
+    .entry:hover { background: rgba(255,255,255,0.1); }
+    .entry h3 { font-family: var(--f-header); font-size: 0.9rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .entry p { font-family: var(--f-sub); font-size: 0.88rem; color: rgba(255,255,255,0.62); line-height: 1.7; margin-bottom: 28px; }
+    .btn-entry {
+      display: inline-block; padding: 11px 28px; border-radius: 50px;
+      font-family: var(--f-sub); font-weight: 700; font-size: 0.88rem;
+      text-decoration: none; border: 2px solid rgba(255,255,255,0.25); color: white;
+      transition: all 0.25s;
+    }
+    .btn-entry:hover { background: var(--coral); border-color: var(--coral); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: #141e2e; padding: 52px 64px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 22px;
+    }
+    .f-brand { display: flex; align-items: center; gap: 10px; }
+    .f-logo-text { font-family: var(--f-header); font-weight: 700; font-size: 1.1rem; color: white; }
+    .f-links { display: flex; gap: 30px; list-style: none; }
+    .f-links a { font-family: var(--f-sub); font-size: 0.85rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.25s; }
+    .f-links a:hover { color: white; }
+    .f-tagline { font-family: var(--f-sub); font-size: 0.8rem; color: rgba(255,255,255,0.3); font-style: italic; }
+
+    /* ---- HERO VISUAL ---- */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-16px); }
+    }
+    .hero-visual {
+      flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 2;
+    }
+    .hero-logo-float {
+      width: 380px; height: auto;
+      animation: float 5s ease-in-out infinite;
+      filter: drop-shadow(0 16px 48px rgba(255,255,255,0.08))
+              drop-shadow(0 0 60px rgba(154,211,194,0.12));
+    }
+
+    /* ---- VENTURE EMBLEMS ---- */
+    .v-emblem {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-header); font-size: 0.72rem; font-weight: 900;
+      letter-spacing: 1px; margin-bottom: 14px; flex-shrink: 0;
+    }
+    .v-em-coral    { background: var(--coral);    color: white; }
+    .v-em-indigo   { background: var(--indigo);   color: white; }
+    .v-em-green    { background: var(--green);    color: white; }
+    .v-em-gold     { background: var(--gold);     color: var(--indigo); }
+    .v-em-turquoise{ background: var(--turquoise);color: var(--indigo); }
+
+    /* ---- TIER CTA BUTTONS ---- */
+    .tier-cta {
+      display: block; width: 100%; margin-top: 22px;
+      padding: 13px 0; border-radius: 50px; text-align: center;
+      font-family: var(--f-sub); font-weight: 700; font-size: 0.88rem;
+      text-decoration: none; border: 2px solid var(--ash);
+      color: var(--indigo); background: transparent; transition: all 0.25s;
+      cursor: pointer;
+    }
+    .tier-cta:hover { border-color: var(--coral); color: var(--coral); }
+    .tier-cta.featured { background: var(--coral); border-color: var(--coral); color: white; }
+    .tier-cta.featured:hover { background: #e0413b; border-color: #e0413b; }
+
+    /* ---- HAMBURGER ---- */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 6px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: white; border-radius: 2px; transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none; position: fixed; top: 76px; left: 0; right: 0; z-index: 998;
+      background: rgba(43,54,73,0.99); border-top: 1px solid rgba(255,255,255,0.08);
+      flex-direction: column; padding: 16px 24px 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--f-sub); font-size: 1.05rem; font-weight: 600;
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.2s;
+    }
+    .mobile-nav a:last-child { border-bottom: none; margin-top: 8px; }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav .mob-cta {
+      background: var(--coral); color: white !important;
+      text-align: center; border-radius: 50px; padding: 14px 0;
+      margin-top: 8px; border-bottom: none !important;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      nav { padding: 14px 24px; }
+      nav ul { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 100px 24px 80px; flex-direction: column; align-items: flex-start; gap: 40px; }
+      .hero-visual { display: none; }
+      section { padding: 64px 24px; }
+      .stats { padding: 32px 24px; }
+      .why-grid, .pillars-grid, .ventures, .tiers, .entry-grid { grid-template-columns: 1fr; }
+      .steps { flex-direction: column; gap: 28px; }
+      .steps::before { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="assets/hht-logo-dark.png" alt="Hummingbird Habit" class="nav-logo-img"/>
+    <div class="nav-brand-text">
+      hummingbird habit
+      <span>behavioral intelligence</span>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#why">why</a></li>
+    <li><a href="#what">what</a></li>
+    <li><a href="#ecosystem">ecosystem</a></li>
+    <li><a href="#membership">membership</a></li>
+    <li><a href="#join" class="nav-cta">join us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#why" class="mob-link">why</a>
+  <a href="#what" class="mob-link">what</a>
+  <a href="#ecosystem" class="mob-link">ecosystem</a>
+  <a href="#membership" class="mob-link">membership</a>
+  <a href="#join" class="mob-cta">join us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">behavioral intelligence venture ecosystem</span>
+    <h1>
+      we built the<br>
+      <span class="accent">operating system</span><br>
+      for human flourishing.
+    </h1>
+    <p class="hero-body">
+      designing spaces, rituals, communities, and tools that make conscious living the natural default, not the effortful exception.
+    </p>
+    <div class="hero-ctas">
+      <a href="#ecosystem" class="btn-primary">explore the ecosystem</a>
+      <a href="#join" class="btn-ghost">join the movement</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="assets/hht-logo-hero.png" alt="Hummingbird Habit" class="hero-logo-float"/>
+  </div>
+  <div class="hero-proof">
+    <div class="hero-proof-dot"></div>
+    <span class="hero-proof-text">operational since 2023 · pairadise resort, pai, thailand · 5.0 airbnb</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <span class="stat-n">$1.31T</span>
+    <span class="stat-l">mental wellness market by 2027</span>
+  </div>
+  <div class="stat">
+    <span class="stat-n">6×</span>
+    <span class="stat-l">growth in meditation app users in 5 years</span>
+  </div>
+  <div class="stat">
+    <span class="stat-n">#1</span>
+    <span class="stat-l">cause of global disability: depression and anxiety (WHO)</span>
+  </div>
+  <div class="stat">
+    <span class="stat-n">71%</span>
+    <span class="stat-l">of consumers prefer brands aligned with their values</span>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="why-bg" id="why">
+  <span class="s-tag">act I · why</span>
+  <h2>
+    the world mastered material prosperity.
+    <span class="muted">our inner worlds are collapsing.</span>
+  </h2>
+  <p class="s-intro">
+    there are more self-help books, wellness apps, and therapy modalities than ever. and yet the gap between what we know and how we actually live keeps widening. this isn't a knowledge problem. <strong>it's a design problem.</strong>
+  </p>
+  <div class="why-grid">
+    <div>
+      <p class="why-body">
+        IQ gave us tools to analyze the world. EQ gave us the language to name what we feel. But neither was built to help us navigate a world of infinite choice, systemic distraction, and fractured belonging to actually flourish inside it.<br><br>
+        What's missing is <strong>Behavioral Intelligence (BI)</strong>: a practical operating system for human beings that consciously shapes environments, rituals, and systems so that wiser, more loving choices become the natural default.
+      </p>
+      <div class="iq-row">
+        <div class="iq-box">
+          <div class="iq-letter iq">IQ</div>
+          <div class="iq-sub">closing the reality–ignorance gap</div>
+        </div>
+        <div class="iq-arrow">→</div>
+        <div class="iq-box">
+          <div class="iq-letter eq">EQ</div>
+          <div class="iq-sub">closing the knowing–feeling gap</div>
+        </div>
+        <div class="iq-arrow">→</div>
+        <div class="iq-box">
+          <div class="iq-letter bi">BI</div>
+          <div class="iq-sub">closing the intention–behavior gap</div>
+        </div>
+      </div>
+    </div>
+    <div class="pull-quote">
+      "BI doesn't make decisions for you.<br><br>
+      it helps you become someone who makes better ones."
+    </div>
+  </div>
+</section>
+
+<!-- SKETCH CALLOUT -->
+<div class="sketch-section">
+  <div class="sketch-label">behavioral intelligence in action</div>
+  <div class="sketch-title">the coffee ritual · AI vs. BI in action</div>
+  <img src="assets/sketch-coffee-ritual.png" alt="The Coffee Ritual: AI vs BI in Action" class="sketch-img"/>
+  <p class="sketch-caption">
+    generic AI remembers your preference and executes it. BI-enhanced AI reads your emotional state and nudges you toward a better choice, without forcing it.
+  </p>
+</div>
+
+<!-- WHAT · PILLARS -->
+<section id="what">
+  <span class="s-tag">act II · what</span>
+  <h2>
+    behavioral intelligence.
+    <span class="muted">the science of actually living well.</span>
+  </h2>
+  <p class="s-intro">
+    BI is not a wellness philosophy or productivity system. It is an integrated methodology drawing from four distinct fields, translating scientific understanding of behavior into the environments, rituals, and systems that make flourishing the natural choice.
+  </p>
+  <div class="pillars-grid">
+    <div class="pillar">
+      <div class="pillar-cat">Science</div>
+      <div class="pillar-name">Behavioral Science &amp; Neuroscience</div>
+      <p class="pillar-text">Understanding why humans think, feel, and act the way they do, not in ideal conditions, but in the messy reality of daily life. How habits form, how decisions are made, and how environment shapes behavior far more than willpower ever could.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-cat">Technology</div>
+      <div class="pillar-name">Systems &amp; Environment Design</div>
+      <p class="pillar-text">Translating behavioral insights into the architecture of spaces, products, and experiences. Change the environment, change the behavior. BI-designed systems make the wise choice the easy choice, without force or friction.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-cat">Spirituality</div>
+      <div class="pillar-name">Depth Psychology &amp; Embodiment</div>
+      <p class="pillar-text">Going beneath the surface of behavior into the inner landscape that drives it. Somatic awareness, shadow work, and spiritual integration, not as add-ons, but as essential dimensions of genuine transformation. This is where science meets soul.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-cat">Art</div>
+      <div class="pillar-name">Ritual, Play &amp; Gamification</div>
+      <p class="pillar-text">Behavioral change that feels like burden fails. BI embeds transformation into daily rituals, playful interactions, and game-like structures so that growth happens through delight, not discipline. This is the art layer in the science.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROTOCOL -->
+<section class="protocol-bg">
+  <span class="s-tag">the hummingbird protocol</span>
+  <h2>
+    small actions, precisely placed,
+    <span class="muted">create transformative change.</span>
+  </h2>
+  <p class="s-intro">
+    Every HHT venture, from Pairadise to Mood4Food, is built around the same five-phase methodology. The universal architecture of how behavioral transformation actually unfolds in human beings.
+  </p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-word">Sense</div>
+      <div class="step-desc">Developing honest awareness of current behavioral patterns, emotional states, and environmental influences.</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-word">Shift</div>
+      <div class="step-desc">Creating the conditions for a new pattern by removing the friction that makes the old pattern automatic.</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-word">Seed</div>
+      <div class="step-desc">Planting specific behavioral interventions and micro-prompts. Small, precise, consistent, like the hummingbird itself.</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <div class="step-word">Shape</div>
+      <div class="step-desc">Reinforcing new patterns through community, accountability, and shared environment. Where individual change becomes collective.</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">5</div>
+      <div class="step-word">Soar</div>
+      <div class="step-desc">The emergent state, not a destination but a new baseline of aliveness. Participants become stewards.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSYSTEM -->
+<section class="eco-bg" id="ecosystem">
+  <span class="s-tag">act III · the ecosystem</span>
+  <h2>
+    one intelligence,
+    <span class="muted">expressed in many forms.</span>
+  </h2>
+  <p class="s-intro">
+    Each venture generates its own revenue and strengthens every other. The IP compounds across all simultaneously. When one thrives, all benefit. This is the closest to how an ecosystem in nature works.
+  </p>
+  <div class="ventures">
+    <div class="venture">
+      <span class="v-badge v-op">operational</span>
+      <div class="v-emblem v-em-coral">PR</div>
+      <div class="v-name">pairadise resort</div>
+      <p class="v-desc">The world's first resort designed around Behavioral Intelligence. Every space, rhythm, and meal is a deliberate instrument of transformation. Pai, Thailand. 5.0 Airbnb rating since 2023.</p>
+    </div>
+    <div class="venture">
+      <span class="v-badge v-op">operational</span>
+      <div class="v-emblem v-em-indigo">BI</div>
+      <div class="v-name">BI consulting</div>
+      <p class="v-desc">Bringing the Hummingbird Protocol to hospitality brands, wellness operators, and purpose-driven enterprises. We don't just advise on change, we re-design the conditions for it.</p>
+    </div>
+    <div class="venture">
+      <span class="v-badge v-dev">in development</span>
+      <img src="assets/mood4food-logo.png" alt="Mood4Food logo" class="v-logo"/>
+      <div class="v-name">mood4food</div>
+      <p class="v-desc">Dining redesigned for emotional connection. Guests choose a mood, the entire experience responds. Menu, table setting, edible games, conversation prompts. Healing disguised as play.</p>
+    </div>
+    <div class="venture">
+      <span class="v-badge v-dev">in development</span>
+      <div class="v-emblem v-em-green">PT</div>
+      <div class="v-name">paitopia co-living</div>
+      <p class="v-desc">The experiment extended into a life. An embodied R&amp;D community where the Hummingbird Protocol is lived collectively, every day. Launching Q1 2027, Pai, Thailand.</p>
+    </div>
+    <div class="venture">
+      <span class="v-badge v-dev">in development</span>
+      <div class="v-emblem v-em-gold">HG</div>
+      <div class="v-name">habit gym</div>
+      <p class="v-desc">Train your mind like you train your body. Gamified behavioral exercises that rewire outdated beliefs through structured, safe repetition until the new pattern becomes the natural one.</p>
+    </div>
+    <div class="venture">
+      <span class="v-badge v-con">concept</span>
+      <div class="v-emblem v-em-turquoise">SN</div>
+      <div class="v-name">sleepicine &amp; nappicine</div>
+      <p class="v-desc">The behavioral health supplement. A candy-like pill with a precisely designed three-step ritual attached. The pill is the cue. The ritual is the cure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section id="membership">
+  <span class="s-tag">act IV · the model</span>
+  <h2>
+    four tiers.
+    <span class="muted">one journey deeper.</span>
+  </h2>
+  <p class="s-intro">our vision: 120,000+ members · 1,000 coaches</p>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-name">Basic</div>
+      <div class="tier-price">$10<span>/mo</span></div>
+      <p class="tier-blurb">Entry point into the HHT ecosystem. AI-assisted, community-first.</p>
+      <ul class="tier-list">
+        <li>AI habit coach access</li>
+        <li>3 free digital products and games</li>
+        <li>Community events and media library</li>
+        <li>Onboarding intro call</li>
+        <li>First Mood4Food visit free</li>
+      </ul>
+      <a href="mailto:ting@hummingbirdhabit.com?subject=Basic membership" class="tier-cta">get started</a>
+    </div>
+    <div class="tier">
+      <div class="tier-name">Explorer</div>
+      <div class="tier-price">$50<span>/mo</span></div>
+      <p class="tier-blurb">For those deepening their practice with human support.</p>
+      <ul class="tier-list">
+        <li>Everything in Basic</li>
+        <li>1hr/mo human coach session</li>
+        <li>Tailored product recommendations</li>
+        <li>Group coaching events</li>
+        <li>Mood4Food member discount</li>
+      </ul>
+      <a href="mailto:ting@hummingbirdhabit.com?subject=Explorer membership" class="tier-cta">start exploring</a>
+    </div>
+    <div class="tier hot">
+      <div class="tier-badge">most intensive</div>
+      <div class="tier-name">Practitioner</div>
+      <div class="tier-price">$100<span>/mo</span></div>
+      <p class="tier-blurb">For committed members pursuing transformation and skill-building.</p>
+      <ul class="tier-list">
+        <li>Everything in Explorer</li>
+        <li>Deeper coaching cadence</li>
+        <li>Priority retreat booking</li>
+        <li>Coach training eligibility</li>
+        <li>Pairadise co-living waitlist</li>
+      </ul>
+      <a href="mailto:ting@hummingbirdhabit.com?subject=Practitioner membership" class="tier-cta featured">join now</a>
+    </div>
+    <div class="tier">
+      <div class="tier-name">Founder</div>
+      <div class="tier-price">$500<span>/mo</span></div>
+      <p class="tier-blurb">Full incubation track. Co-living, startup mentorship, deep ecosystem access.</p>
+      <ul class="tier-list">
+        <li>Everything in Practitioner</li>
+        <li>Co-living residency pathway</li>
+        <li>Startup incubation support</li>
+        <li>Revenue-share opportunities</li>
+        <li>Priority HHT network access</li>
+      </ul>
+      <a href="mailto:ting@hummingbirdhabit.com?subject=Founder membership" class="tier-cta">apply now</a>
+    </div>
+  </div>
+</section>
+
+<!-- INVITATION -->
+<section class="invite-bg" id="join">
+  <span class="s-tag">act V · the invitation</span>
+  <h2>
+    if this feels like it was written for you,
+    <span class="muted">it probably was.</span>
+  </h2>
+  <p class="s-intro">
+    a world where every space you enter, every meal you share, every product you use, is designed to help you flourish. not as a wellness feature. as the default architecture of daily life.
+  </p>
+  <div class="entry-grid">
+    <div class="entry">
+      <h3>invest in the mission</h3>
+      <p>Mission-aligned impact investment. Meaningful returns. Built to last. Class M shares, return capped at 2.5x. Mission aligned and secured.</p>
+      <a href="mailto:ting@hummingbirdhabit.com" class="btn-entry">get in touch</a>
+    </div>
+    <div class="entry">
+      <h3>join the ecosystem</h3>
+      <p>Become a member, coach, or co-living resident. Every entry point leads deeper. Every level of engagement opens the next.</p>
+      <a href="#membership" class="btn-entry">see membership</a>
+    </div>
+    <div class="entry">
+      <h3>partner with us</h3>
+      <p>Co-develop a BI-designed space, concept, or community. We don't just advise on change, we re-design the conditions for it.</p>
+      <a href="mailto:jonathan@hummingbirdhabit.com" class="btn-entry">let's talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">
+    <img src="assets/hht-logo-dark.png" alt="Hummingbird Habit" style="height:38px; width:auto; border-radius:6px;"/>
+    <div class="f-logo-text">hummingbird habit</div>
+  </div>
+  <ul class="f-links">
+    <li><a href="#">hummingbirdhabit.com</a></li>
+    <li><a href="#">pairadise.com</a></li>
+    <li><a href="mailto:ting@hummingbirdhabit.com">ting@hummingbirdhabit.com</a></li>
+  </ul>
+  <div class="f-tagline">science backed · soul aligned · already happening</div>
+</footer>
+
+<script>
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-nav');
+  const links = menu.querySelectorAll('a');
+
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
