@@ -89,39 +89,43 @@
 
     /* ---- HERO ---- */
     .hero {
-      min-height: 100vh; background: var(--indigo);
+      min-height: 100vh;
+      background: url('assets/hero-bg.jpg') center center / cover no-repeat;
       display: flex; align-items: center; justify-content: space-between; gap: 40px;
       padding: 130px 64px 80px; position: relative; overflow: hidden;
     }
+    /* White gradient overlay — keeps left side readable over the image */
     .hero::before {
       content: ''; position: absolute;
-      width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,90,83,0.14), transparent 70%);
-      top: -150px; right: -150px;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(255,255,255,0.97) 0%,
+        rgba(255,255,255,0.90) 40%,
+        rgba(255,255,255,0.55) 65%,
+        rgba(255,255,255,0.10) 100%
+      );
+      z-index: 1;
     }
-    .hero::after {
-      content: ''; position: absolute;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(45,157,120,0.11), transparent 70%);
-      bottom: -100px; left: 100px;
-    }
+    .hero::after { display: none; }
     .hero-content { max-width: 720px; flex: 0 1 720px; position: relative; z-index: 2; }
+    .hero-visual { position: relative; z-index: 2; }
     .hero-eyebrow {
       display: inline-block; font-family: var(--f-sub);
       font-size: 0.72rem; font-weight: 700; letter-spacing: 3.5px;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+      text-transform: uppercase; color: var(--coral); margin-bottom: 22px;
     }
     .hero h1 {
       font-family: var(--f-header);
       font-size: clamp(1.8rem, 3.2vw, 3rem);
       font-weight: 900; font-optical-sizing: auto;
       text-transform: lowercase;
-      color: white; line-height: 1.12; margin-bottom: 28px;
+      color: var(--indigo); line-height: 1.12; margin-bottom: 28px;
     }
     .hero h1 .accent { color: var(--coral); }
     .hero-body {
       font-family: var(--f-sub); font-size: 1.1rem;
-      color: rgba(255,255,255,0.65); line-height: 1.8;
+      color: rgba(43,54,73,0.70); line-height: 1.8;
       margin-bottom: 44px; max-width: 540px;
     }
     .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -134,20 +138,20 @@
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,90,83,0.45); }
     .btn-ghost {
-      background: transparent; color: white;
+      background: transparent; color: var(--indigo);
       padding: 15px 36px; border-radius: 50px;
-      border: 2px solid rgba(255,255,255,0.25);
+      border: 2px solid rgba(43,54,73,0.25);
       font-family: var(--f-sub); font-weight: 700; font-size: 0.95rem;
       text-decoration: none; display: inline-block;
       transition: border-color 0.2s, background 0.2s;
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.07); }
+    .btn-ghost:hover { border-color: var(--indigo); background: rgba(43,54,73,0.06); }
     .hero-proof {
       position: absolute; bottom: 48px; left: 64px; z-index: 2;
       display: flex; align-items: center; gap: 10px;
     }
     .hero-proof-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-    .hero-proof-text { font-family: var(--f-sub); font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+    .hero-proof-text { font-family: var(--f-sub); font-size: 0.82rem; color: rgba(43,54,73,0.45); }
 
     /* ---- STATS ---- */
     .stats {
@@ -342,20 +346,18 @@
     .f-links a:hover { color: white; }
     .f-tagline { font-family: var(--f-sub); font-size: 0.8rem; color: rgba(255,255,255,0.3); font-style: italic; }
 
-    /* ---- HERO VISUAL ---- */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-16px); }
+    /* ---- ACT II WHAT — logo layout ---- */
+    .what-inner {
+      display: flex; align-items: center; gap: 56px; margin-bottom: 56px;
     }
-    .hero-visual {
-      flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
-      position: relative; z-index: 2;
+    .what-text { flex: 1; }
+    .what-text .s-intro { margin-bottom: 0; }
+    .what-logo {
+      flex: 0 0 240px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .hero-logo-float {
-      width: 380px; height: auto;
-      animation: float 5s ease-in-out infinite;
-      filter: drop-shadow(0 16px 48px rgba(255,255,255,0.08))
-              drop-shadow(0 0 60px rgba(154,211,194,0.12));
+    .what-logo img {
+      width: 100%; max-width: 240px; height: auto; opacity: 0.90;
     }
 
     /* ---- VENTURE EMBLEMS ---- */
@@ -419,17 +421,68 @@
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 900px) {
+      /* NAV */
       nav { padding: 14px 24px; }
       nav ul { display: none; }
       .hamburger { display: flex; }
-      .hero { padding: 100px 24px 80px; flex-direction: column; align-items: flex-start; gap: 40px; }
-      .hero-visual { display: none; }
-      section { padding: 64px 24px; }
-      .stats { padding: 32px 24px; }
-      .why-grid, .pillars-grid, .ventures, .tiers, .entry-grid { grid-template-columns: 1fr; }
+
+      /* HERO — stack vertically, solid overlay for text readability */
+      .hero {
+        padding: 100px 24px 80px;
+        flex-direction: column; align-items: flex-start; gap: 32px;
+      }
+      .hero::before { background: rgba(255,255,255,0.92); }
+      .hero-proof { left: 24px; bottom: 28px; }
+      .hero-body { max-width: 100%; }
+
+      /* STATS — 2×2 grid on small screens */
+      .stats { padding: 32px 24px; gap: 24px; }
+      .stat-l { max-width: none; }
+
+      /* SECTIONS */
+      section { padding: 60px 24px; }
+
+      /* SKETCH */
+      .sketch-section { padding: 52px 24px; }
+      .sketch-caption { padding: 0 8px; }
+
+      /* WHY */
+      .why-grid { gap: 32px; }
+
+      /* ACT II WHAT — stack logo below text, hide on very small screens */
+      .what-inner { flex-direction: column; gap: 32px; margin-bottom: 40px; }
+      .what-logo { flex: none; width: 100%; max-width: 200px; margin: 0 auto; }
+
+      /* PILLARS */
+      .pillars-grid { grid-template-columns: 1fr; max-width: 100%; }
+
+      /* PROTOCOL STEPS */
       .steps { flex-direction: column; gap: 28px; }
       .steps::before { display: none; }
-      footer { flex-direction: column; text-align: center; }
+      .step { padding: 0; }
+
+      /* ECOSYSTEM */
+      .ventures { grid-template-columns: 1fr; }
+
+      /* MEMBERSHIP — add top space for badge on featured tier */
+      .tiers { grid-template-columns: 1fr; }
+      .tier.hot { margin-top: 18px; }
+
+      /* INVITATION */
+      .entry-grid { grid-template-columns: 1fr; }
+
+      /* FOOTER */
+      footer { flex-direction: column; text-align: center; padding: 40px 24px; gap: 18px; }
+      .f-links { flex-direction: column; gap: 12px; align-items: center; }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(1.6rem, 6vw, 2rem); }
+      h2 { font-size: clamp(1.5rem, 5vw, 1.9rem); }
+      .stats { flex-direction: column; align-items: center; }
+      .stat { width: 100%; }
+      nav { padding: 12px 16px; }
     }
   </style>
 </head>
@@ -479,9 +532,6 @@
       <a href="#ecosystem" class="btn-primary">explore the ecosystem</a>
       <a href="#join" class="btn-ghost">join the movement</a>
     </div>
-  </div>
-  <div class="hero-visual">
-    <img src="assets/hht-logo-hero.png" alt="Hummingbird Habit" class="hero-logo-float"/>
   </div>
   <div class="hero-proof">
     <div class="hero-proof-dot"></div>
@@ -561,14 +611,21 @@
 
 <!-- WHAT · PILLARS -->
 <section id="what">
-  <span class="s-tag">act II · what</span>
-  <h2>
-    behavioral intelligence.
-    <span class="muted">the science of actually living well.</span>
-  </h2>
-  <p class="s-intro">
-    BI is not a wellness philosophy or productivity system. It is an integrated methodology drawing from four distinct fields, translating scientific understanding of behavior into the environments, rituals, and systems that make flourishing the natural choice.
-  </p>
+  <div class="what-inner">
+    <div class="what-text">
+      <span class="s-tag">act II · what</span>
+      <h2>
+        behavioral intelligence.
+        <span class="muted">the science of actually living well.</span>
+      </h2>
+      <p class="s-intro">
+        BI is not a wellness philosophy or productivity system. It is an integrated methodology drawing from four distinct fields, translating scientific understanding of behavior into the environments, rituals, and systems that make flourishing the natural choice.
+      </p>
+    </div>
+    <div class="what-logo">
+      <img src="assets/hht-logo-transparent.png" alt="Hummingbird Habit"/>
+    </div>
+  </div>
   <div class="pillars-grid">
     <div class="pillar">
       <div class="pillar-cat">Science</div>
@@ -590,7 +647,7 @@
       <div class="pillar-name">Ritual, Play &amp; Gamification</div>
       <p class="pillar-text">Behavioral change that feels like burden fails. BI embeds transformation into daily rituals, playful interactions, and game-like structures so that growth happens through delight, not discipline. This is the art layer in the science.</p>
     </div>
-  </div>
+  </div><!-- /pillars-grid -->
 </section>
 
 <!-- PROTOCOL -->
