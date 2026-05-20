@@ -184,9 +184,16 @@
 
     /* ---- WHY ---- */
     .why-bg { background: var(--light-bg); }
-    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .why-body { font-family: var(--f-sub); color: #555; line-height: 1.85; font-size: 1rem; }
-    .iq-row { display: flex; align-items: center; gap: 10px; margin-top: 40px; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "body quote" "iq quote";
+      column-gap: 64px; row-gap: 40px;
+      align-items: start;
+    }
+    .why-body { grid-area: body; font-family: var(--f-sub); color: #555; line-height: 1.85; font-size: 1rem; }
+    .pull-quote { grid-area: quote; align-self: center; }
+    .iq-row { grid-area: iq; display: flex; align-items: center; gap: 10px; margin-top: 0; }
     .iq-box { flex: 1; text-align: center; }
     .iq-letter { font-family: var(--f-header); font-size: 1.9rem; font-weight: 900; }
     .iq-letter.iq { color: #c0c0c0; }
@@ -446,8 +453,12 @@
       .sketch-section { padding: 52px 24px; }
       .sketch-caption { padding: 0 8px; }
 
-      /* WHY */
-      .why-grid { gap: 32px; }
+      /* WHY — reorder: paragraph → quote → IQ row on mobile */
+      .why-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: "body" "quote" "iq";
+        row-gap: 32px;
+      }
 
       /* ACT II WHAT — stack logo below text, hide on very small screens */
       .what-inner { flex-direction: column; gap: 32px; margin-bottom: 40px; }
@@ -570,31 +581,29 @@
     There are more self-help books, wellness apps, and therapy modalities than ever. And yet the gap between what we know and how we actually live keeps widening. This isn't a knowledge problem. <strong>It's a design problem.</strong>
   </p>
   <div class="why-grid">
-    <div>
-      <p class="why-body">
-        IQ gave us tools to analyze the world. EQ gave us the language to name what we feel. But neither was built to help us navigate a world of infinite choice, systemic distraction, and fractured belonging to actually flourish inside it.<br><br>
-        What's missing is <strong>Behavioral Intelligence (BI)</strong>: a practical operating system for human beings that consciously shapes environments, rituals, and systems so that wiser, more loving choices become the natural default.
-      </p>
-      <div class="iq-row">
-        <div class="iq-box">
-          <div class="iq-letter iq">IQ</div>
-          <div class="iq-sub">closing the reality–ignorance gap</div>
-        </div>
-        <div class="iq-arrow">→</div>
-        <div class="iq-box">
-          <div class="iq-letter eq">EQ</div>
-          <div class="iq-sub">closing the knowing–feeling gap</div>
-        </div>
-        <div class="iq-arrow">→</div>
-        <div class="iq-box">
-          <div class="iq-letter bi">BI</div>
-          <div class="iq-sub">closing the intention–behavior gap</div>
-        </div>
-      </div>
-    </div>
+    <p class="why-body">
+      IQ gave us tools to analyze the world. EQ gave us the language to name what we feel. But neither was built to help us navigate a world of infinite choice, systemic distraction, and fractured belonging to actually flourish inside it.<br><br>
+      What's missing is <strong>Behavioral Intelligence (BI)</strong>: a practical operating system for human beings that consciously shapes environments, rituals, and systems so that wiser, more loving choices become the natural default.
+    </p>
     <div class="pull-quote">
       "BI doesn't make decisions for you.<br><br>
       it helps you become someone who makes better ones."
+    </div>
+    <div class="iq-row">
+      <div class="iq-box">
+        <div class="iq-letter iq">IQ</div>
+        <div class="iq-sub">closing the reality–ignorance gap</div>
+      </div>
+      <div class="iq-arrow">→</div>
+      <div class="iq-box">
+        <div class="iq-letter eq">EQ</div>
+        <div class="iq-sub">closing the knowing–feeling gap</div>
+      </div>
+      <div class="iq-arrow">→</div>
+      <div class="iq-box">
+        <div class="iq-letter bi">BI</div>
+        <div class="iq-sub">closing the intention–behavior gap</div>
+      </div>
     </div>
   </div>
 </section>
