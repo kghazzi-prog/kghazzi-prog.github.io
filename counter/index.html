@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>habit gym · counter</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --indigo:  #2B3649;
+      --coral:   #FF5A53;
+      --gold:    #FFC845;
+      --green:   #2D9D78;
+      --ash:     #DFE0E8;
+      --soft:    rgba(255,255,255,0.10);
+      --soft2:   rgba(255,255,255,0.18);
+      --muted:   rgba(255,255,255,0.60);
+      --f-header:"MuseoModerno", sans-serif;
+      --f-sub:   'Raleway', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: var(--f-sub);
+      background: var(--indigo);
+      color: white;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 12px 20px;
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(43,54,73,0.97);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo { height: 36px; width: auto; border-radius: 4px; }
+    .nav-title {
+      font-family: var(--f-header);
+      font-size: 0.95rem; font-weight: 900;
+      text-transform: lowercase; color: white;
+      line-height: 1.1;
+    }
+    .nav-title span { display: block; color: var(--coral); font-size: 0.7em; font-weight: 400; letter-spacing: 1px; }
+
+    /* ---- DESKTOP BLOCK ---- */
+    .desktop-block {
+      display: none;
+      position: fixed; inset: 0;
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px;
+      text-align: center; padding: 40px;
+      background: var(--indigo);
+    }
+    .desktop-block h2 {
+      font-family: var(--f-header); font-size: 1.8rem;
+      font-weight: 900; text-transform: lowercase; color: white;
+    }
+    .desktop-block p {
+      font-family: var(--f-sub); font-size: 1rem;
+      color: var(--muted); line-height: 1.6; max-width: 340px;
+    }
+    .desktop-qr {
+      width: 120px; height: 120px;
+      background: white; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--indigo); font-size: 0.7rem; font-weight: 700;
+      padding: 8px; text-align: center;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .desktop-block { display: flex !important; }
+      .app { display: none !important; }
+    }
+
+    /* ---- APP ---- */
+    .app {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+      padding-top: 60px;
+    }
+
+    /* topbar */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px 10px;
+      gap: 12px;
+    }
+    .topbar-label {
+      font-size: 0.82rem; color: var(--muted);
+    }
+    .saved-pill {
+      border: 1px solid var(--soft2);
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.75rem; color: white;
+      opacity: 0.65; transition: opacity 0.3s;
+    }
+
+    /* tap zone */
+    .tap-zone {
+      margin: 0 16px 12px;
+      border: 1px solid var(--soft);
+      background: radial-gradient(ellipse 120% 60% at 50% 30%, rgba(255,90,83,0.12), transparent 60%);
+      border-radius: 22px;
+      display: grid; place-items: center;
+      position: relative; overflow: hidden;
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+
+    .flash {
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.08);
+      opacity: 0; pointer-events: none;
+      transition: opacity 100ms ease;
+    }
+    .flash.on { opacity: 1; }
+
+    .count {
+      font-family: var(--f-header);
+      font-size: clamp(80px, 22vw, 140px);
+      font-weight: 900; line-height: 1;
+      letter-spacing: -2px; color: white;
+      text-align: center;
+    }
+    .hint {
+      margin-top: 12px;
+      font-size: 0.78rem; color: var(--muted);
+      text-align: center; letter-spacing: 0.5px;
+    }
+
+    /* bottom buttons */
+    .bottombar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 10px 16px 20px;
+    }
+    .bottombar button {
+      appearance: none;
+      border: 1px solid var(--soft2);
+      background: rgba(255,255,255,0.07);
+      color: white;
+      border-radius: 16px;
+      padding: 16px 10px;
+      font-family: var(--f-sub);
+      font-size: 1rem; font-weight: 700;
+      width: 100%; cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .bottombar button:active { transform: scale(0.97); background: rgba(255,255,255,0.13); }
+    .bottombar button small {
+      display: block; margin-top: 4px;
+      font-size: 0.68rem; font-weight: 500;
+      color: var(--muted);
+    }
+    #resetBtn { border-color: rgba(255,90,83,0.4); }
+    #lockBtn.locked { background: rgba(255,200,69,0.15); border-color: rgba(255,200,69,0.5); color: var(--gold); }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <img src="../assets/hht-logo-dark.png" alt="HHT" class="nav-logo" />
+  <div class="nav-title">
+    habit gym
+    <span>habit card counter</span>
+  </div>
+</nav>
+
+<!-- DESKTOP MESSAGE -->
+<div class="desktop-block">
+  <div style="font-size:3rem;">📱</div>
+  <h2>mobile only</h2>
+  <p>Open this page on your phone to use the tap-to-count widget.</p>
+  <p style="font-size:0.85rem;color:var(--muted);margin-top:8px;">hummingbirdhabit.com/counter</p>
+</div>
+
+<!-- MOBILE APP -->
+<div class="app" aria-label="Habit card counter">
+
+  <div class="topbar">
+    <div class="topbar-label">tap the big area to count</div>
+    <div class="saved-pill" id="savedStatus">saved</div>
+  </div>
+
+  <div class="tap-zone" id="tapZone" role="button" aria-label="Tap to count">
+    <div class="flash" id="flash"></div>
+    <div>
+      <div class="count" id="count">0</div>
+      <div class="hint">tap to +1 &nbsp;·&nbsp; hold reset 1s</div>
+    </div>
+  </div>
+
+  <div class="bottombar">
+    <button id="undoBtn" type="button">Undo<small>−1</small></button>
+    <button id="resetBtn" type="button">Reset<small>hold 1s</small></button>
+    <button id="lockBtn" type="button">Lock<small id="lockLabel">off</small></button>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    const STORAGE_KEY = "hht.counter.v1";
+    const LOCK_KEY    = "hht.counter.locked.v1";
+
+    const countEl    = document.getElementById("count");
+    const tapZone    = document.getElementById("tapZone");
+    const flash      = document.getElementById("flash");
+    const savedEl    = document.getElementById("savedStatus");
+    const undoBtn    = document.getElementById("undoBtn");
+    const resetBtn   = document.getElementById("resetBtn");
+    const lockBtn    = document.getElementById("lockBtn");
+    const lockLabel  = document.getElementById("lockLabel");
+
+    let count    = Number(localStorage.getItem(STORAGE_KEY) || "0");
+    let locked   = localStorage.getItem(LOCK_KEY) === "1";
+    let lastCount = count;
+
+    function render() {
+      countEl.textContent = String(count);
+      lockLabel.textContent = locked ? "on" : "off";
+      lockBtn.classList.toggle("locked", locked);
+    }
+
+    function save() {
+      localStorage.setItem(STORAGE_KEY, String(count));
+      savedEl.textContent = "saved";
+      savedEl.style.opacity = "1";
+      clearTimeout(save._t);
+      save._t = setTimeout(() => { savedEl.style.opacity = "0.65"; }, 400);
+    }
+
+    function pulse() {
+      flash.classList.add("on");
+      setTimeout(() => flash.classList.remove("on"), 110);
+    }
+
+    function increment() {
+      if (locked) return;
+      lastCount = count;
+      count += 1;
+      render(); pulse(); save();
+    }
+
+    function undo() {
+      if (locked) return;
+      const tmp = count;
+      count = lastCount;
+      lastCount = tmp;
+      render(); save();
+    }
+
+    tapZone.addEventListener("click", (e) => { e.preventDefault(); increment(); }, { passive: false });
+    undoBtn.addEventListener("click", (e) => { e.preventDefault(); undo(); }, { passive: false });
+
+    let resetTimer = null;
+    resetBtn.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      if (locked) return;
+      resetBtn.textContent = "Resetting…";
+      resetTimer = setTimeout(() => {
+        lastCount = count; count = 0;
+        render(); save();
+        resetBtn.innerHTML = 'Reset<small>hold 1s</small>';
+        resetTimer = null;
+      }, 1000);
+    }, { passive: false });
+
+    function cancelReset() {
+      if (resetTimer) {
+        clearTimeout(resetTimer);
+        resetTimer = null;
+        resetBtn.innerHTML = 'Reset<small>hold 1s</small>';
+      }
+    }
+    resetBtn.addEventListener("pointerup",     cancelReset);
+    resetBtn.addEventListener("pointercancel", cancelReset);
+    resetBtn.addEventListener("pointerleave",  cancelReset);
+
+    lockBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      locked = !locked;
+      localStorage.setItem(LOCK_KEY, locked ? "1" : "0");
+      render();
+    }, { passive: false });
+
+    render();
+    savedEl.style.opacity = "0.65";
+  })();
+</script>
+
+</body>
+</html>
