@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>no small talk · hummingbird habit</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Muller';
+      src: url('../assets/fonts/Muller-Regular.woff2') format('woff2'),
+           url('../assets/fonts/Muller-Regular.woff') format('woff');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Muller';
+      src: url('../assets/fonts/Muller-Bold.woff2') format('woff2'),
+           url('../assets/fonts/Muller-Bold.woff') format('woff');
+      font-weight: 700; font-style: normal;
+    }
+
+    :root {
+      --indigo:   #2B3649;
+      --coral:    #FF5A53;
+      --gold:     #FFC845;
+      --ash:      #DFE0E8;
+      --green:    #2D9D78;
+      --light-bg: #F7F8FA;
+      --f-header: "MuseoModerno", sans-serif;
+      --f-sub:    'Muller', 'Raleway', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--f-sub); background: var(--indigo); color: white; overflow-x: hidden; }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 14px 64px;
+      display: flex; align-items: center;
+      background: rgba(43,54,73,0.97);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-brand-text {
+      font-family: var(--f-header); font-weight: 700; font-size: 1.05rem;
+      color: white; letter-spacing: -0.2px; line-height: 1.1;
+    }
+    .nav-brand-text span { display: block; color: var(--coral); font-size: 0.75em; font-weight: 400; letter-spacing: 1px; }
+    .nav-logo-img { height: 48px; width: auto; display: block; border-radius: 6px; }
+
+    /* ---- PAGE ---- */
+    .page {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 110px 24px 80px;
+    }
+
+    .card {
+      display: flex; gap: 72px; align-items: center;
+      max-width: 1000px; width: 100%;
+    }
+
+    /* ---- TEXT + FORM SIDE ---- */
+    .content { flex: 1; }
+
+    .eyebrow {
+      font-family: var(--f-sub); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold);
+      display: block; margin-bottom: 32px;
+    }
+
+    .body-text {
+      font-family: var(--f-sub); font-size: 1.08rem;
+      color: rgba(255,255,255,0.75); line-height: 1.85;
+      margin-bottom: 40px;
+    }
+
+    /* ---- FORM ---- */
+    .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+
+    input[type="text"],
+    input[type="email"] {
+      flex: 1; min-width: 140px;
+      font-family: var(--f-sub); font-size: 0.95rem;
+      color: var(--indigo); background: white;
+      border: none; border-radius: 50px;
+      padding: 13px 20px; outline: none;
+    }
+
+    .btn-submit {
+      background: var(--coral); color: white;
+      font-family: var(--f-sub); font-weight: 700; font-size: 0.95rem;
+      padding: 13px 28px; border-radius: 50px;
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,90,83,0.45); }
+
+    .success-msg {
+      display: none; margin-top: 16px;
+      padding: 12px 18px;
+      background: rgba(45,157,120,0.15); border: 1.5px solid var(--green);
+      border-radius: 12px;
+      font-family: var(--f-sub); font-size: 0.9rem; color: var(--green);
+      font-weight: 600;
+    }
+
+    /* ---- IMAGE SIDE ---- */
+    .visual img {
+      width: 280px; height: auto;
+      border-radius: 18px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      nav { padding: 14px 24px; }
+      .card { flex-direction: column-reverse; gap: 40px; }
+      .visual img { width: 200px; }
+      .form-row { flex-direction: column; }
+      input[type="text"], input[type="email"] { min-width: unset; }
+      .btn-submit { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="../assets/hht-logo-dark.png" alt="Hummingbird Habit" class="nav-logo-img"/>
+    <div class="nav-brand-text">
+      hummingbird habit
+      <span>behavioral intelligence</span>
+    </div>
+  </a>
+</nav>
+
+<div class="page">
+  <div class="card">
+
+    <div class="content">
+      <span class="eyebrow">no small talk · coming soon</span>
+      <p class="body-text">
+        The questions on the T-shirt are just the beginning.<br><br>
+        Soon, you'll be able to share your answers, connect with others, and unlock access to experiences that go beyond the ordinary — maybe, even a retreat.<br><br>
+        For now, our digital space is still being built. But you don't have to miss out.<br><br>
+        Leave your email below, and we'll let you know the moment the campaign goes live.
+      </p>
+
+      <form id="notify-form" novalidate>
+        <div class="form-row">
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          <button type="submit" class="btn-submit">notify me</button>
+        </div>
+        <div class="success-msg" id="success-msg">You're on the list! We'll be in touch soon.</div>
+      </form>
+    </div>
+
+    <div class="visual">
+      <img src="https://cdn.lugc.link/d7837e9f-f61f-47a9-9dfd-ae19977d1dbc/-/preview/303x381/-/format/auto/"
+           alt="No Small Talk T-shirt" />
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('notify-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if (!name || !email) return;
+
+    fetch('https://formspree.io/f/xpwzgkol', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, form: 'no-small-talk' })
+    }).then(function() {
+      document.getElementById('notify-form').reset();
+      document.getElementById('success-msg').style.display = 'block';
+    }).catch(function() {
+      document.getElementById('success-msg').style.display = 'block';
+    });
+  });
+</script>
+
+</body>
+</html>
