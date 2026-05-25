@@ -435,14 +435,14 @@
 
       /* HERO — stack vertically, solid overlay for text readability */
       .hero {
-        padding: 100px 24px 40px;
-        flex-direction: column; align-items: flex-start; gap: 32px;
+        padding: 80px 24px 28px;
+        flex-direction: column; align-items: flex-start; gap: 20px;
         min-height: unset;
         background-image: none;
       }
       .hero::before { background: rgba(255,255,255,0.92); }
-      .hero-proof { left: 24px; bottom: 28px; }
-      .hero-body { max-width: 100%; }
+      .hero-proof { position: relative; left: auto; bottom: auto; margin-top: 4px; }
+      .hero-body { max-width: 100%; margin-bottom: 28px; }
 
       /* STATS — 2×2 grid on small screens */
       .stats { padding: 32px 24px; gap: 24px; }
