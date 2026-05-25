@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#2B3649"/>
+  <!-- Upper wing (coral) -->
+  <path d="M16,13 C13,5 4,4 5,11 C8,8 12,11 16,13 Z" fill="#FF5A53"/>
+  <!-- Lower wing (coral, softer) -->
+  <path d="M16,18 C13,26 4,27 5,20 C8,22 12,20 16,18 Z" fill="#FF5A53" opacity="0.60"/>
+  <!-- Body (white) -->
+  <ellipse cx="19.5" cy="15.5" rx="5.5" ry="3.1" fill="white" transform="rotate(-7 19.5 15.5)"/>
+  <!-- Head (white) -->
+  <circle cx="22.5" cy="12" r="2.5" fill="white"/>
+  <!-- Beak pointing right (white) -->
+  <polygon points="24.6,11 31,9 24.6,13.5" fill="white"/>
+  <!-- Tail fan (white, translucent) -->
+  <path d="M14,15 L3,10.5 L5.5,15 L3,19.5 Z" fill="white" opacity="0.75"/>
+</svg>
