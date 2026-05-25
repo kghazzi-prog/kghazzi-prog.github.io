@@ -59,8 +59,16 @@
     body { font-family: var(--f-sub); color: #333; overflow-x: hidden; }
 
     /* ---- NAV ---- */
+    .construction-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1100;
+      background: var(--gold); color: var(--indigo);
+      text-align: center; padding: 8px 20px;
+      font-family: var(--f-sub); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 1000;
+      position: fixed; top: 36px; width: 100%; z-index: 1000;
       padding: 14px 64px;
       display: flex; align-items: center; justify-content: space-between;
       background: rgba(43,54,73,0.97);
@@ -94,7 +102,7 @@
       min-height: 100vh;
       background: url('assets/hero-bg.jpg') center center / cover no-repeat;
       display: flex; align-items: center; justify-content: space-between; gap: 40px;
-      padding: 130px 64px 80px; position: relative; overflow: hidden;
+      padding: 166px 64px 80px; position: relative; overflow: hidden;
     }
     /* White gradient overlay — keeps left side readable over the image */
     .hero::before {
@@ -409,7 +417,7 @@
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     .mobile-nav {
-      display: none; position: fixed; top: 76px; left: 0; right: 0; z-index: 998;
+      display: none; position: fixed; top: 112px; left: 0; right: 0; z-index: 998;
       background: rgba(43,54,73,0.99); border-top: 1px solid rgba(255,255,255,0.08);
       flex-direction: column; padding: 16px 24px 28px;
     }
@@ -437,7 +445,7 @@
 
       /* HERO — stack vertically, solid overlay for text readability */
       .hero {
-        padding: 80px 24px 28px;
+        padding: 116px 24px 28px;
         flex-direction: column; align-items: flex-start; gap: 20px;
         min-height: unset;
         background-image: none;
@@ -502,6 +510,11 @@
   </style>
 </head>
 <body>
+
+<!-- CONSTRUCTION BANNER -->
+<div class="construction-bar">
+  website under construction &nbsp;·&nbsp; we're building something beautiful &nbsp;·&nbsp; come back soon
+</div>
 
 <!-- NAV -->
 <nav>
