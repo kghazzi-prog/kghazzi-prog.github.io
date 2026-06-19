@@ -156,22 +156,8 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .btn-ghost:hover { border-color: var(--indigo); background: rgba(43,54,73,0.06); }
-    .hero-proof {
-      position: absolute; bottom: 48px; left: 64px; z-index: 2;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .hero-proof-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-    .hero-proof-text { font-family: var(--f-sub); font-size: 0.82rem; color: rgba(43,54,73,0.45); }
 
     /* ---- STATS ---- */
-    .stats {
-      background: var(--coral); padding: 44px 64px;
-      display: flex; justify-content: space-around; flex-wrap: wrap; gap: 28px;
-    }
-    .stat { text-align: center; color: white; }
-    .stat-n { font-family: var(--f-header); font-size: 2.6rem; font-weight: 900; display: block; }
-    .stat-l { font-family: var(--f-sub); font-size: 0.82rem; font-weight: 600; opacity: 0.9; max-width: 150px; line-height: 1.3; }
-
     /* ---- SECTIONS ---- */
     section { padding: 100px 64px; }
     .s-tag {
@@ -306,29 +292,6 @@
     .v-desc { font-family: var(--f-sub); font-size: 0.88rem; color: #666; line-height: 1.65; }
 
     /* ---- MEMBERSHIP ---- */
-    .tiers { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 56px; }
-    .tier { border: 2px solid var(--ash); border-radius: 22px; padding: 34px 24px; position: relative; transition: transform 0.28s; }
-    .tier:hover { transform: translateY(-4px); }
-    .tier.hot { border-color: var(--coral); background: #fff7f7; }
-    .tier-badge {
-      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: var(--coral); color: white;
-      font-family: var(--f-sub); font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      padding: 4px 14px; border-radius: 50px; white-space: nowrap;
-    }
-    .tier-name { font-family: var(--f-header); font-size: 0.78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #aaa; margin-bottom: 8px; }
-    .tier-price { font-family: var(--f-header); font-size: 2.4rem; font-weight: 900; color: var(--indigo); }
-    .tier-price span { font-size: 0.9rem; font-weight: 400; color: #aaa; }
-    .tier-blurb { font-family: var(--f-sub); font-size: 0.83rem; color: #888; margin: 10px 0 22px; line-height: 1.5; }
-    .tier-list { list-style: none; }
-    .tier-list li {
-      font-family: var(--f-sub); font-size: 0.82rem; color: #555;
-      padding: 6px 0; border-bottom: 1px solid #f2f2f2;
-      display: flex; align-items: flex-start; gap: 8px;
-    }
-    .tier-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-
     /* ---- INVITATION ---- */
     .invite-bg { background: var(--indigo); text-align: center; }
     .invite-bg h2 { color: white; }
@@ -350,6 +313,60 @@
       transition: all 0.25s;
     }
     .btn-entry:hover { background: var(--coral); border-color: var(--coral); }
+
+    /* ---- SIGNUP FORM ---- */
+    .signup-section { background: var(--light-bg); text-align: center; }
+    .signup-form { margin-top: 36px; }
+    .signup-fields {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .signup-fields input {
+      font-family: var(--f-sub); font-size: 0.95rem;
+      padding: 14px 22px; border-radius: 50px;
+      border: 2px solid var(--ash); background: white;
+      color: var(--indigo); outline: none; width: 220px;
+      transition: border-color 0.25s;
+    }
+    .signup-fields input:focus { border-color: var(--coral); }
+    .signup-btn {
+      font-family: var(--f-sub); font-weight: 700; font-size: 0.95rem;
+      padding: 14px 36px; border-radius: 50px;
+      background: var(--coral); color: white; border: none;
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .signup-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,90,83,0.4); }
+    .signup-success {
+      display: none; margin-top: 20px;
+      font-family: var(--f-sub); font-size: 0.9rem;
+      color: var(--green); font-weight: 600;
+    }
+
+    /* ---- TEAM ---- */
+    .team-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 40px; margin-top: 56px; max-width: 860px; margin-inline: auto;
+    }
+    .team-card { text-align: center; }
+    .team-photo {
+      width: 120px; height: 120px; border-radius: 50%;
+      margin: 0 auto 20px;
+      background: var(--ash);
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .team-photo--placeholder {
+      background: var(--indigo); color: var(--gold);
+      font-family: var(--f-header); font-size: 1.4rem; font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .team-name {
+      font-family: var(--f-header); font-size: 1.1rem; font-weight: 900;
+      color: var(--indigo); margin-bottom: 8px;
+    }
+    .team-role {
+      font-family: var(--f-sub); font-size: 0.82rem;
+      color: rgba(43,54,73,0.55); line-height: 1.6;
+    }
 
     /* ---- FOOTER ---- */
     footer {
@@ -389,19 +406,6 @@
     .v-em-green    { background: var(--green);    color: white; }
     .v-em-gold     { background: var(--gold);     color: var(--indigo); }
     .v-em-turquoise{ background: var(--turquoise);color: var(--indigo); }
-
-    /* ---- TIER CTA BUTTONS ---- */
-    .tier-cta {
-      display: block; width: 100%; margin-top: 22px;
-      padding: 13px 0; border-radius: 50px; text-align: center;
-      font-family: var(--f-sub); font-weight: 700; font-size: 0.88rem;
-      text-decoration: none; border: 2px solid var(--ash);
-      color: var(--indigo); background: transparent; transition: all 0.25s;
-      cursor: pointer;
-    }
-    .tier-cta:hover { border-color: var(--coral); color: var(--coral); }
-    .tier-cta.featured { background: var(--coral); border-color: var(--coral); color: white; }
-    .tier-cta.featured:hover { background: #e0413b; border-color: #e0413b; }
 
     /* ---- HAMBURGER ---- */
     .hamburger {
@@ -451,12 +455,7 @@
         background-image: none;
       }
       .hero::before { background: rgba(255,255,255,0.92); }
-      .hero-proof { position: relative; left: auto; bottom: auto; margin-top: 4px; }
       .hero-body { max-width: 100%; margin-bottom: 28px; }
-
-      /* STATS — 2×2 grid on small screens */
-      .stats { padding: 32px 24px; gap: 24px; }
-      .stat-l { max-width: none; }
 
       /* SECTIONS */
       section { padding: 60px 24px; }
@@ -472,7 +471,7 @@
         row-gap: 32px;
       }
 
-      /* ACT II WHAT — stack logo below text, hide on very small screens */
+      /* ACT II WHAT — stack logo below text */
       .what-inner { flex-direction: column; gap: 32px; margin-bottom: 40px; }
       .what-logo { flex: none; width: 100%; max-width: 200px; margin: 0 auto; }
 
@@ -487,12 +486,16 @@
       /* ECOSYSTEM */
       .ventures { grid-template-columns: 1fr; }
 
-      /* MEMBERSHIP — add top space for badge on featured tier */
-      .tiers { grid-template-columns: 1fr; }
-      .tier.hot { margin-top: 18px; }
+      /* TEAM */
+      .team-grid { grid-template-columns: 1fr; gap: 28px; }
 
       /* INVITATION */
       .entry-grid { grid-template-columns: 1fr; }
+
+      /* SIGNUP FORM */
+      .signup-fields { flex-direction: column; align-items: stretch; }
+      .signup-fields input { width: 100%; }
+      .signup-btn { width: 100%; }
 
       /* FOOTER */
       footer { flex-direction: column; text-align: center; padding: 40px 24px; gap: 18px; }
@@ -503,8 +506,6 @@
     @media (max-width: 480px) {
       .hero h1 { font-size: clamp(1.6rem, 6vw, 2rem); }
       h2 { font-size: clamp(1.5rem, 5vw, 1.9rem); }
-      .stats { flex-direction: column; align-items: center; }
-      .stat { width: 100%; }
       nav { padding: 12px 16px; }
     }
   </style>
@@ -529,7 +530,6 @@
     <li><a href="#why">why</a></li>
     <li><a href="#what">what</a></li>
     <li><a href="#ecosystem">ecosystem</a></li>
-    <li><a href="#membership">membership</a></li>
     <li><a href="#join" class="nav-cta">join us</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="open menu">
@@ -541,7 +541,6 @@
   <a href="#why" class="mob-link">why</a>
   <a href="#what" class="mob-link">what</a>
   <a href="#ecosystem" class="mob-link">ecosystem</a>
-  <a href="#membership" class="mob-link">membership</a>
   <a href="#join" class="mob-cta">join us</a>
 </div>
 
@@ -561,31 +560,9 @@
       <a href="#join" class="btn-ghost">join the movement</a>
     </div>
   </div>
-  <div class="hero-proof">
-    <div class="hero-proof-dot"></div>
-    <span class="hero-proof-text">operational since 2023 · pairadise resort, pai, thailand · 5.0 airbnb</span>
-  </div>
 </section>
 
 <!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <span class="stat-n">$1.31T</span>
-    <span class="stat-l">mental wellness market by 2027</span>
-  </div>
-  <div class="stat">
-    <span class="stat-n">6×</span>
-    <span class="stat-l">growth in meditation app users in 5 years</span>
-  </div>
-  <div class="stat">
-    <span class="stat-n">#1</span>
-    <span class="stat-l">cause of global disability: depression and anxiety (WHO)</span>
-  </div>
-  <div class="stat">
-    <span class="stat-n">71%</span>
-    <span class="stat-l">of consumers prefer brands aligned with their values</span>
-  </div>
-</div>
 
 <!-- WHY -->
 <section class="why-bg" id="why">
@@ -765,74 +742,37 @@
   </div>
 </section>
 
-<!-- MEMBERSHIP -->
-<section id="membership">
-  <span class="s-tag">act IV · the model</span>
-  <h2>
-    four tiers.
-    <span class="muted">one journey deeper.</span>
-  </h2>
-  <p class="s-intro">our vision: 120,000+ members · 1,000 coaches</p>
-  <div class="tiers">
-    <div class="tier">
-      <div class="tier-name">Basic</div>
-      <div class="tier-price">$10<span>/mo</span></div>
-      <p class="tier-blurb">Entry point into the HHT ecosystem. AI-assisted, community-first.</p>
-      <ul class="tier-list">
-        <li>AI habit coach access</li>
-        <li>3 free digital products and games</li>
-        <li>Community events and media library</li>
-        <li>Onboarding intro call</li>
-        <li>First Mood4Food visit free</li>
-      </ul>
-      <a href="mailto:ting@hummingbirdhabit.com?subject=Basic membership" class="tier-cta">get started</a>
+<!-- TEAM -->
+<section id="team">
+  <span class="s-tag">the humans doing this</span>
+  <h2>not an org chart.<span class="muted"> a circle of practice.</span></h2>
+  <p class="s-intro">a small group of deeply committed humans designing conditions for a better world.</p>
+  <div class="team-grid">
+
+    <div class="team-card">
+      <div class="team-photo team-photo--placeholder">TJ</div>
+      <div class="team-name">Dr. Ting Jiang</div>
+      <div class="team-role">founder &amp; CEO · behavioral scientist · PhD, Dan Ariely Lab, Duke</div>
     </div>
-    <div class="tier">
-      <div class="tier-name">Explorer</div>
-      <div class="tier-price">$50<span>/mo</span></div>
-      <p class="tier-blurb">For those deepening their practice with human support.</p>
-      <ul class="tier-list">
-        <li>Everything in Basic</li>
-        <li>1hr/mo human coach session</li>
-        <li>Tailored product recommendations</li>
-        <li>Group coaching events</li>
-        <li>Mood4Food member discount</li>
-      </ul>
-      <a href="mailto:ting@hummingbirdhabit.com?subject=Explorer membership" class="tier-cta">start exploring</a>
+
+    <div class="team-card">
+      <div class="team-photo team-photo--placeholder">JK</div>
+      <div class="team-name">Jonathan Klodt</div>
+      <div class="team-role">CSSO · hospitality pioneer · steward owner</div>
     </div>
-    <div class="tier hot">
-      <div class="tier-badge">most intensive</div>
-      <div class="tier-name">Practitioner</div>
-      <div class="tier-price">$100<span>/mo</span></div>
-      <p class="tier-blurb">For committed members pursuing transformation and skill-building.</p>
-      <ul class="tier-list">
-        <li>Everything in Explorer</li>
-        <li>Deeper coaching cadence</li>
-        <li>Priority retreat booking</li>
-        <li>Coach training eligibility</li>
-        <li>Pairadise co-living waitlist</li>
-      </ul>
-      <a href="mailto:ting@hummingbirdhabit.com?subject=Practitioner membership" class="tier-cta featured">join now</a>
+
+    <div class="team-card">
+      <div class="team-photo team-photo--placeholder">KG</div>
+      <div class="team-name">Karim Ghazzi</div>
+      <div class="team-role">advisor · marketing &amp; communication</div>
     </div>
-    <div class="tier">
-      <div class="tier-name">Founder</div>
-      <div class="tier-price">$500<span>/mo</span></div>
-      <p class="tier-blurb">Full incubation track. Co-living, startup mentorship, deep ecosystem access.</p>
-      <ul class="tier-list">
-        <li>Everything in Practitioner</li>
-        <li>Co-living residency pathway</li>
-        <li>Startup incubation support</li>
-        <li>Revenue-share opportunities</li>
-        <li>Priority HHT network access</li>
-      </ul>
-      <a href="mailto:ting@hummingbirdhabit.com?subject=Founder membership" class="tier-cta">apply now</a>
-    </div>
+
   </div>
 </section>
 
 <!-- INVITATION -->
 <section class="invite-bg" id="join">
-  <span class="s-tag">act V · the invitation</span>
+  <span class="s-tag">act IV · the invitation</span>
   <h2>
     if this feels like it was written for you,
     <span class="muted">it probably was.</span>
@@ -849,7 +789,7 @@
     <div class="entry">
       <h3>join the ecosystem</h3>
       <p>Become a member, coach, or co-living resident. Every entry point leads deeper. Every level of engagement opens the next.</p>
-      <a href="#membership" class="btn-entry">see membership</a>
+      <a href="mailto:ting@hummingbirdhabit.com" class="btn-entry">get in touch</a>
     </div>
     <div class="entry">
       <h3>partner with us</h3>
@@ -857,6 +797,21 @@
       <a href="mailto:jonathan@hummingbirdhabit.com" class="btn-entry">let's talk</a>
     </div>
   </div>
+</section>
+
+<!-- STAY IN TOUCH FORM -->
+<section class="signup-section">
+  <span class="s-tag">stay connected</span>
+  <h2>stay in the loop.</h2>
+  <p class="s-intro">Leave your name and email and we'll reach out when the time is right.</p>
+  <form class="signup-form" id="signup-form">
+    <div class="signup-fields">
+      <input type="text" id="signup-name" placeholder="your name" required autocomplete="off" />
+      <input type="email" id="signup-email" placeholder="your email" required autocomplete="off" />
+      <button type="submit" class="signup-btn">send</button>
+    </div>
+    <p class="signup-success" id="signup-success">you're in. we'll be in touch soon.</p>
+  </form>
 </section>
 
 <!-- FOOTER -->
@@ -887,6 +842,32 @@
     link.addEventListener('click', () => {
       btn.classList.remove('open');
       menu.classList.remove('open');
+    });
+  });
+</script>
+
+<script>
+  // SIGNUP FORM → Google Sheets
+  // Replace PASTE_YOUR_APPS_SCRIPT_URL_HERE with the URL you get in step 7 below
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbyY0JP_g1xZkcfubHCbpdKpfB6mktAyrkmEhvJy2Ixgf9C17XQ44KUowXCDFnqUmy_sXA/exec';
+
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var name  = document.getElementById('signup-name').value.trim();
+    var email = document.getElementById('signup-email').value.trim();
+    if (!name || !email) return;
+    var btn = document.querySelector('.signup-btn');
+    btn.textContent = 'sending…'; btn.disabled = true;
+    fetch(SHEET_URL, {
+      method: 'POST',
+      body: JSON.stringify({ name: name, email: email }),
+      headers: { 'Content-Type': 'application/json' }
+    }).then(function() {
+      document.getElementById('signup-form').reset();
+      document.getElementById('signup-success').style.display = 'block';
+      btn.textContent = 'send'; btn.disabled = false;
+    }).catch(function() {
+      btn.textContent = 'send'; btn.disabled = false;
     });
   });
 </script>
