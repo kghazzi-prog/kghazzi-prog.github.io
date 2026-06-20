@@ -398,6 +398,10 @@
     .pairadise-photo--sm {
       grid-row: 2;
     }
+    .pairadise-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
     .photo-label {
       font-family: var(--f-sub); font-size: 0.72rem; font-weight: 600;
       color: rgba(255,255,255,0.35); letter-spacing: 0.5px;
@@ -859,10 +863,10 @@
 
     <div class="pairadise-gallery">
       <div class="pairadise-photo pairadise-photo--main">
-        <span class="photo-label">resort · Pai, Thailand</span>
+        <img src="assets/pairadise-main.jpg" alt="Pairadise Resort, Pai Thailand" />
       </div>
       <div class="pairadise-photo pairadise-photo--sm">
-        <span class="photo-label">guest experience</span>
+        <img src="assets/pairadise-2.jpg" alt="Pairadise guest experience" />
       </div>
       <div class="pairadise-photo pairadise-photo--sm">
         <span class="photo-label">the space</span>
