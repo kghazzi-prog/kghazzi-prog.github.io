@@ -860,8 +860,8 @@
     btn.textContent = 'sending…'; btn.disabled = true;
     fetch(SHEET_URL, {
       method: 'POST',
-      body: JSON.stringify({ name: name, email: email }),
-      headers: { 'Content-Type': 'application/json' }
+      mode: 'no-cors',
+      body: new URLSearchParams({ name: name, email: email })
     }).then(function() {
       document.getElementById('signup-form').reset();
       document.getElementById('signup-success').style.display = 'block';
